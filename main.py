@@ -1,6 +1,7 @@
 from flask import Flask
 from config import global_config
 from db import init_extensions
+from routes import resume_bp
 
 ## initialize app instance
 def create_app (env_name):
@@ -12,6 +13,9 @@ def create_app (env_name):
     
     # config db
     init_extensions(app=app)
+    
+    ## register blue print
+    app.register_blueprint(resume_bp, url_prefix='/api')
 
     return app
 
