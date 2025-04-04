@@ -1,14 +1,8 @@
 from dotenv import load_dotenv
 import os
 
-## can be assign when start the program
-env = os.getenv('FLASK_ENV', 'staging')
-if env == 'staging':
-    load_dotenv('.env.staging')
-else:
-    load_dotenv('.env')
+load_dotenv('.env')
     
-
 class Config(object): 
     """Global config for Flask Application"""
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///slide_rater.db')
