@@ -8,7 +8,7 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///slide_rater.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = os.getenv('SECRET_KEY', 'slide_rater_secret_key')
-    UPLOAD_FOLDER=" /Users/victortsai/uploads/slide_ranker/"
+    UPLOAD_FOLDER="/Users/victortsai/uploads/CSE575/"
     ALLOWED_EXTENSIONS = {'ppt','pptx'}
     SCHEDULER_API_ENABLED = True
 
