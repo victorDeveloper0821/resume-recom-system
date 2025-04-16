@@ -3,6 +3,8 @@ from . import resume_bp  # import blueprints
 import os
 import pandas as pd
 from utils.ResumeParser import get_resume_parser
+from db import get_resume_collection
+import numpy as np
 
 @resume_bp.route('/resumes/<int:id>', methods=['GET'])
 def get_resumes(id):
@@ -62,6 +64,7 @@ def recommand_resume():
 @resume_bp.route('/resume/import', methods=['POST'])
 def import_trainingData ():
     """Import training csv data"""
+    collection = get_resume_collection()
     
     if 'training' not in request.files: 
         return "No file part in the request", 400
@@ -89,5 +92,6 @@ def import_trainingData ():
     htmls = train_df['Resume_html'].to_list()
     mocks = list()
     for html in htmls:
-        mocks.append(get_resume_parser(html_text=html))
-    return mocks
+        mocks.append(get_resume_parser(html_text=html).extract_text())
+    collection.insert_many(mocks)
+    return 'Insert successful', 200

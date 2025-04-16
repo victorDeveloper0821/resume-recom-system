@@ -5,13 +5,11 @@ load_dotenv('.env')
     
 class Config(object): 
     """Global config for Flask Application"""
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///slide_rater.db')
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    SECRET_KEY = os.getenv('SECRET_KEY', 'slide_rater_secret_key')
-    UPLOAD_FOLDER="/Users/victortsai/uploads/CSE575/"
-    ALLOWED_EXTENSIONS = {'ppt','pptx'}
+    UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', "/Users/victortsai/uploads/CSE575/")
+    MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017')
+    MONGO_DB_NAME = os.getenv('MONGO_DB_NAME', 'resume_db')
     SCHEDULER_API_ENABLED = True
-
+    
 class DevelopmentConfig(Config):
     """Development env"""
     DEBUG = True

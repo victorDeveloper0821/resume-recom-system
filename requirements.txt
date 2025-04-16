@@ -5,3 +5,5 @@ requests
 python-dotenv
 BeautifulSoup4
 pandas
+pymongo
+numpy

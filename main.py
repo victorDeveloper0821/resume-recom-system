@@ -11,7 +11,7 @@ def create_app (env_name):
     # fetch config from env name
     app.config.from_object(global_config[env_name])
     
-    # config db
+    # Config MongoDB
     init_extensions(app=app)
     
     ## register blue print
