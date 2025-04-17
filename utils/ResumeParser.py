@@ -52,7 +52,7 @@ class HtmlResumeParser(ResumeParser):
 
                 if title_tag and title_tag.get_text(strip=True) != "":
                     results.append(section_data)
-
+            
             return results
 
         except Exception as e:

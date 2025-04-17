@@ -22,6 +22,6 @@ def create_app (env_name):
 if __name__ == '__main__':
     try:
         app = create_app('dev')                       
-        app.run(host='0.0.0.0', port=51800, debug=True)
+        app.run(host='0.0.0.0', port=8080, debug=True)
     except Exception as e:
         print(f"Error: {e}")
