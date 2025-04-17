@@ -31,28 +31,23 @@ class HtmlResumeParser(ResumeParser):
                 raise ValueError("HTML content not provided")
 
             sections = soup.find_all("div", class_="section")
-            results = []
+            results = {}
 
             for i, sec in enumerate(sections, 1):
-                section_data = {
-                    "section_title": "",
-                    "paragraphs": []
-                }
-
+                
                 # Extract section title
                 title_tag = sec.find('div', class_='sectiontitle')
                 if title_tag:
-                    section_data["section_title"] = title_tag.get_text(strip=True)
+                    title = title_tag.get_text(strip=True)
 
                 # Extract all paragraph divs within this section
                 paragraph_tags = sec.find_all('div', class_='paragraph')
                 for para in paragraph_tags:
                     paragraph_text = para.get_text(strip=True)
-                    section_data["paragraphs"].append(paragraph_text)
-
+                    
                 if title_tag and title_tag.get_text(strip=True) != "":
-                    results.append(section_data)
-            
+                    results[title] = paragraph_text
+
             return results
 
         except Exception as e:
