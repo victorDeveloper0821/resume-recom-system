@@ -39,7 +39,8 @@ def add_resume():
         parsed_data = parser.extract_text()
     except Exception as e:
         return f"Failed to parse resume: {str(e)}", 500
-
+    collection = get_resume_collection()
+    collection.insert_one({'text':parsed_data})
     return jsonify({
         "message": "Resume parsed and added!",
         "parsed_data": parsed_data
