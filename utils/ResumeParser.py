@@ -2,6 +2,9 @@ import os
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
 import pdfplumber
+from sentence_transformers import SentenceTransformer
+
+model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 class ResumeParser(ABC):
     """履歷解析基底類別"""
@@ -33,6 +36,8 @@ class HtmlResumeParser(ResumeParser):
             sections = soup.find_all("div", class_="section")
             results = {}
 
+            embeddings = model.encode(self.text)
+
             for i, sec in enumerate(sections, 1):
                 
                 # Extract section title
@@ -48,6 +53,8 @@ class HtmlResumeParser(ResumeParser):
                 if title_tag and title_tag.get_text(strip=True) != "":
                     results[title] = paragraph_text
 
+            results["embedded_vector"] = embeddings.tolist()
+            
             return results
 
         except Exception as e:
