@@ -9,6 +9,7 @@ class Config(object):
     MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017')
     MONGO_DB_NAME = os.getenv('MONGO_DB_NAME', 'resume_db')
     SCHEDULER_API_ENABLED = True
+    SECRET_KEY = os.getenv("SECRET_KEY", "ResumeRecommand")
     
 class DevelopmentConfig(Config):
     """Development env"""
