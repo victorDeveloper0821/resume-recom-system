@@ -33,11 +33,12 @@ class HtmlResumeParser(ResumeParser):
             else:
                 raise ValueError("HTML content not provided")
 
+            ## html section extract
             sections = soup.find_all("div", class_="section")
+            
             results = {}
-
-            embeddings = model.encode(self.text)
-
+            html_text = ''
+            
             for i, sec in enumerate(sections, 1):
                 
                 # Extract section title
@@ -52,7 +53,11 @@ class HtmlResumeParser(ResumeParser):
                     
                 if title_tag and title_tag.get_text(strip=True) != "":
                     results[title] = paragraph_text
-
+                    html_text = html_text + '\n' + title+ '\n' + paragraph_text
+                    
+            ## html_text for concatinate the html text in html file or html text into plain text 
+            ## embedding the text
+            embeddings = model.encode(html_text)  
             results["embedded_vector"] = embeddings.tolist()
             
             return results

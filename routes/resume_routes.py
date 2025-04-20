@@ -4,6 +4,7 @@ import os
 import pandas as pd
 from utils.ResumeParser import get_resume_parser
 from db import get_resume_collection
+from utils.SerialUtils import generate_serial_id
 import numpy as np
 
 @resume_bp.route('/resumes/<int:id>', methods=['GET'])
@@ -39,11 +40,16 @@ def add_resume():
         parsed_data = parser.extract_text()
     except Exception as e:
         return f"Failed to parse resume: {str(e)}", 500
+    serialID = generate_serial_id(secret_key=current_app.config['SECRET_KEY'],prefix="RES")
+    parsed_data['serialID'] = serialID
+    ## insert one data to mongodb 
     collection = get_resume_collection()
-    collection.insert_one({'text':parsed_data})
+    collection.insert_one(parsed_data)
+    parsed_data.pop('_id', None)
     return jsonify({
         "message": "Resume parsed and added!",
-        "parsed_data": parsed_data
+        "data": parsed_data,
+        "SerialID": serialID
     }), 200
     
 @resume_bp.route('/resume/recommand', methods=['GET', 'POST'])
@@ -91,8 +97,11 @@ def import_trainingData ():
          return "html texts not exist", 401
     
     htmls = train_df['Resume_html'].to_list()
-    mocks = list()
+    training = list()
     for html in htmls:
-        mocks.append(get_resume_parser(html_text=html).extract_text())
-    collection.insert_many(mocks)
+        serialID = generate_serial_id(secret_key=current_app.config['SECRET_KEY'],prefix="RES")
+        resumeObj = get_resume_parser(html_text=html).extract_text()
+        resumeObj["SerialID"] = serialID
+        training.append(resumeObj)
+    collection.insert_many(training)
     return 'Insert successful', 200
