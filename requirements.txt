@@ -3,3 +3,8 @@ flask-sqlalchemy
 gunicorn
 requests
 python-dotenv
+BeautifulSoup4
+pandas
+pymongo
+numpy
+pdfplumber
