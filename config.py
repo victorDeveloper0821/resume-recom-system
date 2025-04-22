@@ -6,7 +6,7 @@ load_dotenv('.env')
 class Config(object): 
     """Global config for Flask Application"""
     UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', "/Users/victortsai/uploads/CSE575/")
-    MONGO_URI = os.getenv('MONGO_URI', 'mongodb://localhost:27017')
+    MONGO_URI = os.getenv('MONGO_URI', 'mongodb+srv://austin:81WJm8UEJnKkN4jr@recommend.ssgbnnu.mongodb.net/?retryWrites=true&w=majority&appName=recommend')
     MONGO_DB_NAME = os.getenv('MONGO_DB_NAME', 'resume_db')
     SCHEDULER_API_ENABLED = True
     
