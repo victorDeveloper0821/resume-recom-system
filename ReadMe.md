@@ -16,3 +16,7 @@ This project is an API for a resume recommendation system, developed as part of 
 - `routes/` (module): Defines API endpoints.  
 - `utils/` : Contains shared logic and helper functions.  
 **P.S. rename .env.sample to .env or program may not be activated.**
+
+## Start the chatbot 
+- Go to mongodb Atlas and login using username: austin@hsingnan.com password: Top122489
+- Run `streamlit run app.py`

@@ -9,12 +9,14 @@ if "torch" in sys.modules:
     del sys.modules["torch.classes"]
 
 # Setup Ollama LLM
-llm = OllamaLLM(model="gemma3:1b")
+llm = OllamaLLM(model="gemma3:4b")
 
 # Prompt template
-template = """You are a resume recommendation assistant.
+template = """You are a resume recommendation assistant. Please analyze these five documents step by step, document by document.
+always remember to show the resume ID.
 You are given search results of top resumes and must summarize or highlight key of all five resumes information for the user.
-Please remember to show the resume ID.
+If the user request has notiong to do with the retrieved resume, dont show any resume information, just answer the request by yourself, like 
+having a casual chat.
 
 Resume Search Results:
 {search_results}
@@ -22,7 +24,7 @@ Resume Search Results:
 User Request:
 {question}
 
-Answer:"""
+Answer: """
 prompt = PromptTemplate(input_variables=["search_results", "question"], template=template)
 chain = prompt | llm
 
