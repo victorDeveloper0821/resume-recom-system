@@ -22,3 +22,8 @@ This project is an API for a resume recommendation system, developed as part of 
 - Download Ollama: https://ollama.com/
 - Pull model `gemma3:4b` : run command `ollama pull gemma3:4b`
 - Run `streamlit run app.py`
+
+## Prompt example
+- `customer service management experience`
+- `machine learning experience all you got`
+- Also other prompts notiong to do with the retrieved resume
