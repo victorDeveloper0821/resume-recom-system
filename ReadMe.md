@@ -18,5 +18,7 @@ This project is an API for a resume recommendation system, developed as part of 
 **P.S. rename .env.sample to .env or program may not be activated.**
 
 ## Start the chatbot 
-- Go to mongodb Atlas and login using username: austin@hsingnan.com password: Top122489
+- Go to mongodb Atlas and login using username: austin@hsingnan.com password: Top122489, remenber to add IP, press add IP on the top.
+- Download Ollama: https://ollama.com/
+- Pull model `gemma3:4b` : run command `ollama pull gemma3:4b`
 - Run `streamlit run app.py`
